@@ -6,3 +6,6 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'home.html')
 
+def habitaciones(request):
+    return render(request, 'habitaciones.html')
+
