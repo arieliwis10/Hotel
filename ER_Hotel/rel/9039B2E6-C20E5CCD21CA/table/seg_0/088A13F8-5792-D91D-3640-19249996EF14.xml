@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="088A13F8-5792-D91D-3640-19249996EF14" name="CATEGORIA">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:47:04 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<ordsAlias>table_6</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_categoria" id="FA84E82F-F841-0F09-89FB-CF2E7D688B8B">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:47:25 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_cat" id="4238B71A-3E20-71BF-0DF0-D49886863363">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:47:40 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E937F7F7-77E6-FE00-702F-2D9D9047093C" name="CATEGORIA_PK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:47:25 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FA84E82F-F841-0F09-89FB-CF2E7D688B8B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
