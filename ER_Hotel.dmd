@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="ER_Hotel" id="302B5339-596A-81F6-99A0-2CE5DE33D074" version="3.5">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-30 23:50:12 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>302B5339-596A-81F6-99A0-2CE5DE33D074</designId>
+</OSDM_Design>

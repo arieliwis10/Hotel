@@ -1,0 +1,176 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8A25C758-0E88-D53D-522C-793096D3F979" name="RESERVA">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:16:38 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<ordsAlias>table_4</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="reserva_id" id="BA5BA1AD-D66F-4024-0C31-1681425AB33A">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:16:56 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cliente_id" id="14F12453-EB1D-2254-5B38-C7B86BE81CDC">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:17:08 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B9E517EC-1DD7-695D-7B1A-0318A4A5FCFC" referredColumn="337955E3-2098-C80E-C28C-C8775C3EC91C"/>
+</associations>
+</Column>
+<Column name="habitacion_id" id="48EAE9FC-B24E-5D7A-B147-9ECDB2E76427">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:17:19 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B1A9CDD8-0B17-4F3C-17E2-813284B9B952" referredColumn="02D6A3B7-33D0-841E-7F53-839AF46A88C5"/>
+</associations>
+</Column>
+<Column name="fecha_check_in" id="22C5B553-6298-BD8A-B74C-2060774F0058">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:17:34 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_check_out" id="0BCC03F5-F421-5AE7-3EF0-97E8CCCB6A77">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:17:43 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cantidad_personas" id="BA69BB88-DDA0-6401-5437-38E75AE0AC8E">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:17:58 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_pago" id="F5390D92-BD7A-22B7-AB92-0F2A0D28B6B0">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:53:53 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2FAB259C-088E-C719-01FD-FF96C102C58C" referredColumn="BF8EEB7A-F2DE-18D4-8354-3ACA8396DF79"/>
+</associations>
+</Column>
+<Column name="id_servicio" id="AF36F287-F5CE-8755-C4B6-B2279378E52F">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:08:28 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9B08D3A3-EAD1-9871-EEA7-9E55A92A5755" referredColumn="3161768D-C165-35C9-F6CB-51E9667728DC"/>
+</associations>
+</Column>
+<Column name="estado_reserva" id="C46DEB8E-AE4F-5593-20B8-7A7D1FB2A638">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:50:22 UTC</createdTime>
+<commentInRDBMS><![CDATA[El  estado reflejara lo siguiente sobre la reserva:
+-Confirmada
+-Cancelada
+-Pendiente]]></commentInRDBMS>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="270AC860-B8A6-0313-2A08-E174F40EF5BB" name="RESERVA_PK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:16:56 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BA5BA1AD-D66F-4024-0C31-1681425AB33A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F585DB19-EAFF-A249-81FE-E0ED3CE386FA" name="RESERVA_CLIENTE_FK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:28:05 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="14F12453-EB1D-2254-5B38-C7B86BE81CDC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="445E6085-5E85-BD0A-A3C5-F191AA8CE9BC" name="RESERVA_HABITACION_FK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:28:23 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="48EAE9FC-B24E-5D7A-B147-9ECDB2E76427"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2B99DD35-256D-0CAE-E356-14B894105E06" name="RESERVA_PAGO_FK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 00:54:06 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F5390D92-BD7A-22B7-AB92-0F2A0D28B6B0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="06DCB53B-8327-1011-4E7D-BCB98B53ACA1" name="RESERVA_SERVICIOS_FK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:09:07 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AF36F287-F5CE-8755-C4B6-B2279378E52F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

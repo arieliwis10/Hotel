@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CA544470-4459-D8B5-1837-3BBFDE321D31" name="TIPO_PAGO">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:25:50 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_tipo_pago" id="5A6AAFA9-27DF-BB9B-2291-2759DF537A96">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:26:28 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="016DEDF3-777C-8359-E1D7-1A9422B37194">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:26:28 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B7F58C18-E234-C2CC-D4BC-1BB78D34D7DE" name="TIPO_PAGO_PK">
+<createdBy>sebco</createdBy>
+<createdTime>2024-08-31 01:26:28 UTC</createdTime>
+<ownerDesignName>ER_Hotel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5A6AAFA9-27DF-BB9B-2291-2759DF537A96"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
