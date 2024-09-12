@@ -97,3 +97,112 @@ img {
     width: 500px;  
     
 }
+
+ /* Estilos del contenedor del botón */
+ .button-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100px; /* Ajusta según lo necesario */
+}
+
+/* Estilos del botón */
+.btn-primary {
+    width: 240px;
+    height: 48px;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 24px;
+    cursor: pointer;
+    transition: all 1s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+}
+
+.btn-primary:hover {
+    background-color: rgb(255, 0, 0);
+    color: black;
+    
+}
+
+ /* Estilos para la sección de imágenes */
+ .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 columnas automáticas */
+    gap: 15px; /* Espacio entre las imágenes */
+    padding: 20px;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.service-title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.carousel {
+    position: relative;
+    width: 40%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden; /* Evita que las imágenes desborden el carrusel */
+}
+
+/* Estilos para las imágenes */
+.slides {
+    display: flex;
+    transition: 1s ease;
+}
+
+.slides img {
+    width: 100%;
+    height: auto; /* Ajusta la altura automáticamente */
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+}
+
+/* Botones de navegación */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Estilos para los indicadores */
+.dots {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 5px;
+    background-color: lightgray;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.active {
+    background-color: gray;
+}

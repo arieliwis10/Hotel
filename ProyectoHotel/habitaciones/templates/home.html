@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva Hotelera</title>
     <link rel="stylesheet" href="{% static 'habitaciones/css/styles.css' %}">
+    <script src="{% static 'habitaciones/js/carrusel.js' %}"></script>
 </head>
 <body>
     <!-- Encabezado -->
@@ -35,33 +36,51 @@
         <a href="{% url 'iniciar_sesion' %}" class="login-link" >Iniciar Sesión</a>
     {% endif %}
     </section>
-
-    <!-- Formulario de Búsqueda de Habitaciones -->
-    <section id="search">
-        <h2>Busca tu Habitación</h2>
-        <form method="GET" action="#">
-            <input type="date" name="check_in" placeholder="Fecha de Entrada">
-            <input type="date" name="check_out" placeholder="Fecha de Salida">
-            <select name="room_type">
-                <option value="single">Individual</option>
-                <option value="double">Doble</option>
-                <option value="suite">Suite</option>
-            </select>
-            <button type="submit">Buscar</button>
-        </form>
-    </section>
+    
+    <div class="button-container">
+        <button class="btn-primary">Reservar Habitación</button>
+    </div>
 
     <!-- Habitaciones Destacadas -->
     <section id="featured-rooms">
         <h2>Habitaciones Destacadas</h2>
-        <div class="room">
-            <img src="{% static 'images/habitacion1.jpg' %}" alt="Habitación 1">
-            
-            <h3>Habitación Doble</h3>
-            <p>Desde $100 por noche</p>
+
+    
+    
         </div>
         <!-- Puedes agregar más habitaciones similares aquí -->
     </section>
+
+    <div class="carousel">
+        <div class="slides">
+            <img src="{% static 'habitaciones/images/habitacion1.jpg' %}" alt="Imagen 1">
+            <img src="{% static 'habitaciones/images/habitacion2.jpg' %}" alt="Imagen 2">
+            <img src="{% static 'habitaciones/images/habitacion3.jpg' %}" alt="Imagen 3">
+        </div>
+    </div>
+    
+    <!-- Indicadores -->
+    <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <!-- Título de la sección -->
+    <h2 class="service-title">CONOCE NUESTROS SERVICIOS</h2>
+
+    <!-- Galería de imágenes -->
+    <div class="image-gallery">
+        <img src="{% static 'habitaciones/images/imagen1.jpg' %}" alt="Descripción de la imagen 1">
+        <img src="{% static 'habitaciones/images/imagen2.jpg' %}" alt="Descripción de la imagen 1">
+        <img src="{% static 'habitaciones/images/imagen3.jpg' %}" alt="Descripción de la imagen 1">
+    </div>
+    <div class="image-gallery">
+        <img src="{% static 'habitaciones/images/imagen4.jpg' %}" alt="Descripción de la imagen 1">
+        <img src="{% static 'habitaciones/images/imagen5.jpg' %}" alt="Descripción de la imagen 1">
+        <img src="{% static 'habitaciones/images/imagen6.jpg' %}" alt="Descripción de la imagen 1">
+        <img src="{% static 'habitaciones/images/imagen7.jpg' %}" alt="Descripción de la imagen 1">
+    </div>
 
     <!-- Testimonios -->
     <section id="testimonials">
