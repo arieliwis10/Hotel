@@ -1,3 +1,26 @@
+--- DROPS
+ALTER TABLE PAGO DROP CONSTRAINT fk_reserva;
+ALTER TABLE RESERVA DROP CONSTRAINT fk_pago;
+DROP TABLE RESERVA;
+DROP TABLE PAGO;
+DROP TABLE SERVICIOS;
+DROP TABLE CLIENTE;
+DROP TABLE HABITACION;
+DROP TABLE CATEGORIA;
+DROP TABLE PERSONAL;
+DROP TABLE HOTEL;
+DROP TABLE TIPO_PAGO;
+
+
+--- CREACION DE TABLAS
+CREATE TABLE CLIENTE (
+    cliente_id INTEGER PRIMARY KEY,
+    nombre_cli VARCHAR2(25),
+    apellido_cli VARCHAR2(25),
+    correo VARCHAR2(50),
+    telefono INTEGER
+);
+
 CREATE TABLE HOTEL (
     hotel_id INTEGER PRIMARY KEY,
     nombre VARCHAR2(25),
@@ -21,12 +44,16 @@ CREATE TABLE HABITACION (
     FOREIGN KEY (id_categoria) REFERENCES CATEGORIA(id_categoria)
 );
 
-CREATE TABLE CLIENTE (
-    cliente_id INTEGER PRIMARY KEY,
-    nombre_cli VARCHAR2(25),
-    apellido_cli VARCHAR2(25),
-    correo VARCHAR2(50),
-    telefono INTEGER
+CREATE TABLE TIPO_PAGO (
+    id_tipo_pago INTEGER PRIMARY KEY,
+    descripcion VARCHAR2(15)
+);
+
+CREATE TABLE SERVICIOS (
+    id_servicio INTEGER PRIMARY KEY,
+    nombre VARCHAR2(15),
+    descripcion VARCHAR2(70),
+    valor INTEGER
 );
 
 CREATE TABLE RESERVA (
@@ -41,8 +68,19 @@ CREATE TABLE RESERVA (
     estado_reserva VARCHAR2(15),
     FOREIGN KEY (cliente_id) REFERENCES CLIENTE(cliente_id),
     FOREIGN KEY (habitacion_id) REFERENCES HABITACION(habitacion_id),
-    FOREIGN KEY (id_pago) REFERENCES PAGO(id_pago),
     FOREIGN KEY (id_servicio) REFERENCES SERVICIOS(id_servicio)
+);
+
+CREATE TABLE PAGO (
+    id_pago INTEGER PRIMARY KEY,
+    id_cliente INTEGER,
+    id_reserva INTEGER,
+    id_tipo_pago INTEGER,
+    fecha_pago DATE,
+    monto INTEGER,
+    estado_pago VARCHAR2(15),
+    FOREIGN KEY (id_cliente) REFERENCES CLIENTE(cliente_id),
+    FOREIGN KEY (id_tipo_pago) REFERENCES TIPO_PAGO(id_tipo_pago)
 );
 
 CREATE TABLE PERSONAL (
@@ -56,27 +94,10 @@ CREATE TABLE PERSONAL (
     FOREIGN KEY (id_hotel) REFERENCES HOTEL(hotel_id)
 );
 
-CREATE TABLE PAGO (
-    id_pago INTEGER PRIMARY KEY,
-    id_cliente INTEGER,
-    id_reserva INTEGER,
-    id_tipo_pago INTEGER,
-    fecha_pago DATE,
-    monto INTEGER,
-    estado_pago VARCHAR2(15),
-    FOREIGN KEY (id_cliente) REFERENCES CLIENTE(cliente_id),
-    FOREIGN KEY (id_reserva) REFERENCES RESERVA(reserva_id),
-    FOREIGN KEY (id_tipo_pago) REFERENCES TIPO_PAGO(id_tipo_pago)
-);
 
-CREATE TABLE TIPO_PAGO (
-    id_tipo_pago INTEGER PRIMARY KEY,
-    descripcion VARCHAR2(15)
-);
 
-CREATE TABLE SERVICIOS (
-    id_servicio INTEGER PRIMARY KEY,
-    nombre VARCHAR2(15),
-    descripcion VARCHAR2(70),
-    valor INTEGER
-);
+ALTER TABLE PAGO ADD CONSTRAINT fk_reserva FOREIGN KEY (id_reserva) REFERENCES RESERVA(reserva_id);
+
+ALTER TABLE RESERVA ADD CONSTRAINT fk_pago FOREIGN KEY (id_pago) REFERENCES PAGO(id_pago);
+
+

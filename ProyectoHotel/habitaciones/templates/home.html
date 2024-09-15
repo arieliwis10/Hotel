@@ -1,27 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva Hotelera</title>
-    <link rel="stylesheet" href="{% static 'habitaciones/css/styles.css' %}">
-    <script src="{% static 'habitaciones/js/carrusel.js' %}"></script>
-</head>
-<body>
-    <!-- Encabezado -->
-    <header>
-        <nav>
-            <a href="#"><img src="{% static 'habitaciones/images/logo.png' %}" class= "imglogo" alt="Logo del Hotel"></a>
-            <ul>
-                <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'habitaciones' %}">Habitaciones</a></li>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block content %}
 
     <!-- Banner de Bienvenida -->
     <section id="welcome-banner">
@@ -88,10 +67,4 @@
         <p>"Excelente servicio y comodidades, ¡volveremos pronto!"</p>
         <p>"Muy buena ubicación y atención."</p>
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2024 Hotel Reserva. Todos los derechos reservados.</p>
-    </footer>
-</body>
-</html>
+    {% endblock %}

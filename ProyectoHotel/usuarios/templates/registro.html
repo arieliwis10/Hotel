@@ -11,7 +11,7 @@
     <!-- Encabezado -->
     <header>
         <nav>
-            <a href="#"><img src="{% static 'images/logo.png' %}" class= "imglogo" alt="Logo del Hotel"></a>
+            <a href="#"><img src="{% static 'usuarios/images/logo.png' %}" class= "imglogo" alt="Logo del Hotel"></a>
             <ul>
                 <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="#">Habitaciones</a></li>
@@ -21,7 +21,7 @@
             </ul>
         </nav>
     </header>
-
+    {% load static %}
     <section class="register-container">
         <div class="register-box">
             <h2>Registrarse</h2>
