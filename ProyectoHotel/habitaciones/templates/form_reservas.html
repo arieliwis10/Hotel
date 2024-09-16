@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form id="reservation-form" action="{% url 'reservar' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" id="start-date" name="start_date">
+    <input type="hidden" id="end-date" name="end_date">
+    <button type="submit" class="btn btn-primary">Reservar</button>
+</form>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#calendar-container", {
+            inline: true,
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            mode: "range",
+            onChange: function(selectedDates, dateStr, instance) {
+                // Las fechas seleccionadas se almacenan aquí
+                if (selectedDates.length == 2) {
+                    // Asignar las fechas al formulario
+                    document.getElementById('start-date').value = selectedDates[0].toISOString().split('T')[0];
+                    document.getElementById('end-date').value = selectedDates[1].toISOString().split('T')[0];
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

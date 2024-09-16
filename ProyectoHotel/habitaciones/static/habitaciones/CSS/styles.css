@@ -98,48 +98,43 @@ img {
     
 }
 
- /* Estilos del contenedor del botón */
- .button-container {
+ /* Asegurar que el contenedor esté centrado */
+.button-container {
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100px; /* Ajusta según lo necesario */
+    justify-content: center;
+    margin: 20px 0;
 }
 
 /* Estilos del botón */
 .btn-primary {
-    width: 240px;
-    height: 48px;
-    background-color: transparent;
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 25px;
-    font-size: 18px;
-    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 30px;
+    font-size: 16px;
     font-weight: bold;
-    margin: 24px;
-    cursor: pointer;
-    transition: all 1s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+    color: black;
+    background-color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: rgb(255, 0, 0);
-    color: black;
-    
+    background-color: black;
+    color: white;
 }
 
  /* Estilos para la sección de imágenes */
  .image-gallery {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 columnas automáticas */
-    gap: 15px; /* Espacio entre las imágenes */
+    gap: 10px; /* Espacio entre las imágenes */
     padding: 20px;
 }
 
 .image-gallery img {
-    width: 100%;
+    width: 80%;
     height: auto;
     object-fit: cover; /* Mantiene la proporción de la imagen */
     border-radius: 10px; /* Bordes redondeados */
@@ -153,39 +148,25 @@ img {
 }
 
 .carousel {
-    position: relative;
-    width: 40%;
-    max-width: 800px;
-    margin: auto;
-    overflow: hidden; /* Evita que las imágenes desborden el carrusel */
+    width: 100%;
+    overflow: hidden; /* Oculta todo lo que no está en el área visible del carrusel */
 }
 
 /* Estilos para las imágenes */
 .slides {
     display: flex;
-    transition: 1s ease;
+    transition: transform 0.5s ease; /* Suaviza la transición entre slides */
 }
 
-.slides img {
-    width: 100%;
-    height: auto; /* Ajusta la altura automáticamente */
-    object-fit: cover; /* Mantiene la proporción de la imagen */
-    border-radius: 8px; /* Bordes redondeados opcionales */
+.slide {
+    min-width: 100%; /* Cada slide tiene el ancho del carrusel */
+    transition: opacity 0.5s ease; /* Suaviza la transición de opacidad */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Botones de navegación */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
 
 /* Estilos para los indicadores */
 .dots {
@@ -194,15 +175,168 @@ img {
 }
 
 .dot {
-    cursor: pointer;
     height: 15px;
     width: 15px;
-    margin: 5px;
-    background-color: lightgray;
+    margin: 0 5px;
+    background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
+    transition: background-color 1s ease;
 }
 
-.active {
-    background-color: gray;
+.dot.active {
+    background-color: #717171;  /* El punto activo tiene un color diferente */
+}   
+
+.image-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.carousel img {
+    width: 35%; /* Asegura que las imágenes llenen su contenedor */
+}
+
+/* Estilos para el cuadro de información debajo de la imagen */
+.carousel-caption-static {
+    background: rgba(0, 94, 16, 0.5); /* Fondo semi-transparente */
+    padding: 15px;
+    color: white;
+    text-align: left;
+    margin-top: 10px; /* Añade margen superior para separar del borde de la imagen */
+}
+
+/* Ajustar las imágenes en el carrusel */
+.carousel-item img {
+    max-height: 400px;
+    object-fit: cover;
+    width: 100%; /* Asegura que las imágenes ocupen todo el ancho */
+}
+
+/* Opcional: puedes ajustar la separación de la sección "Habitaciones Disponibles" */
+.col-md-6 h2 {
+    margin-bottom: 20px;
+}
+
+
+.room {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    width: 300px; /* O el tamaño que prefieras */
+}
+
+.room img {
+    width: 100%;
+    height: 200px; /* Ajusta según tus necesidades */
+    object-fit: cover;
+}
+
+.room ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.room button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Para hacer el calendario más grande */
+#calendar-container {
+    margin-left: 50px; /* Añade separación entre las habitaciones y el calendario */
+    width: 200px;      /* Ajustar el ancho del calendario */
+    font-size: 1.2em;  /* Aumentar el tamaño del texto del calendario */
+}
+
+/* Ajustar el tamaño del input si lo necesitas */
+#calendar-container input {
+    font-size: 1.2em;  /* Ajusta el tamaño de los campos de entrada si hay */
+}
+
+/* Añadir padding a las habitaciones para más espacio */
+.rooms {
+    margin-bottom: 30px; /* Separación entre las habitaciones y el contenido siguiente */
+}
+
+/* Ajustar el estilo de la fecha seleccionada (opcional) */
+.flatpickr-day.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* Ajustar el estilo general del calendario */
+.flatpickr-calendar {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+/* Estilizar el botón de reservar */
+button.btn-secundary {
+    background-color: #007bff; /* Color azul del botón */
+    border-color: #0056b3;     /* Color del borde */
+    color: white;              /* Texto blanco */
+    padding: 10px 10px;        /* Ajuste de relleno (padding) para hacer el botón más grande */
+    font-size: 0.5em;          /* Tamaño del texto */
+    border-radius: 5px;        /* Borde redondeado */
+    margin-left: 50px;
+}
+
+button.btn-secundary:hover {
+    background-color: #0056b3; /* Color al pasar el mouse por encima */
+    border-color: #003f7f;     /* Borde al pasar el mouse */
+}
+
+.text-center {
+    text-align: center; /* Alinear el botón al centro */
+}
+
+.mt-3 {
+    margin-top: 20px; /* Añadir margen superior para separar el botón del calendario */
+}
+
+/* Contenedor para reseñas y mapa */
+.review {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.review p {
+    margin: 0;
+}
+
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+/* Espacio entre la sección de habitaciones y reseñas/mapa */
+.mt-5 {
+    margin-top: 50px;
 }
