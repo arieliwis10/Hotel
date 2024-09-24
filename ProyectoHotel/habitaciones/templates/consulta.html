@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<section id="reservation-banner">   
+    <h1>Detalles de la Reserva</h1>
+</section>
+
+<div class="container mt-4">
+    <h2>Reserva para la Habitación: {{ habitacion.tipo }}</h2>
+    <div class="row">
+        <div class="col-md-6">
+            {% if habitacion.imagen %}
+                <img class="img-fluid" src="{{ habitacion.imagen.url }}" alt="Foto de {{ habitacion.tipo }}">
+            {% else %}
+                <img class="img-fluid" src="{% static 'habitaciones/images/habitacion1.jpg' %}" alt="Foto de {{ habitacion.tipo }}">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h5>Detalles de la Habitación</h5>
+            <ul>
+                <li>Precio: ${{ habitacion.precio }}</li>
+                <li>Desayuno: {{ habitacion.desayuno_incluido|yesno:"Incluido,No incluido" }}</li>
+                <li>Baño privado: {{ habitacion.bano_privado|yesno:"Sí,No" }}</li>
+                <li>Admite mascotas: {{ habitacion.admite_mascotas|yesno:"Sí,No" }}</li>
+                <li>Vistas: {{ habitacion.vista }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <h4>Fechas de la Reserva</h4>
+    <p>Fecha de inicio: {{ start_date }}</p>
+    <p>Fecha de fin: {{ end_date }}</p>
+
+    <div class="text-center mt-4">
+        <h3>Confirmar Reserva</h3>
+        <form action="{% url 'consultar_reserva' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
+            <input type="hidden" name="start_date" value="{{ start_date }}">
+            <input type="hidden" name="end_date" value="{{ end_date }}">
+            <button type="submit" class="btn btn-success btn-lg">Confirmar Reserva</button>
+        </form>
+    </div>
+</div>
+
+<!-- Sección de reseñas y mapa -->
+<div class="row mt-5">
+    <!-- Reseñas -->
+    <div class="col-md-6">
+        <h4>02 Reseñas</h4>
+        <div class="review">
+            <p><strong>Paulina - hace 3 meses</strong></p>
+            <p>★★★★★</p>
+            <p>Muy cómodo y excelente ubicación!</p>
+        </div>
+        <hr>
+        <div class="review">
+            <p><strong>Nataly - hace 5 meses</strong></p>
+            <p>★★★★☆</p>
+            <p>Excelente ubicación, muy cerca a distintas opciones donde ir a comer. Lo malo, al momento de llegar estaba un poco sucio, pero el resto ok!</p>
+        </div>
+    </div>
+
+    <!-- Mapa -->
+    <div class="col-md-6">
+        <h4>Ubicación</h4>
+        <div class="map-container">
+            <!-- Puedes usar un iframe de Google Maps o una imagen de un mapa de referencia -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0190749285737!2d-122.40140978468138!3d37.788610679756825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c2db444f%3A0x8f1b34948f9f66c4!2sHotel%20Zoe!5e0!3m2!1sen!2sus!4v1638907250601!5m2!1sen!2sus"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

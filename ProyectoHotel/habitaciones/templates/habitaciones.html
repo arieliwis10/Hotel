@@ -24,8 +24,6 @@
 <section id="welcome-banner">   
     <h1>Habitaciones</h1>
 </section>
-
-<div class="container">
     <div class="row">
         <!-- Carrusel de Habitaciones -->
         <div class="col-md-6">
@@ -33,14 +31,12 @@
             <div id="habitacionesCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     {% for habitacion in habitaciones %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <!-- Mostrar la imagen cargada desde la base de datos -->
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" data-habitacion-id="{{ habitacion.id }}">
                         {% if habitacion.imagen %}
                             <img class="d-block w-100" src="{{ habitacion.imagen.url }}" alt="Foto de {{ habitacion.tipo }}">
                         {% else %}
                             <img class="d-block w-100" src="{% static 'habitaciones/images/habitacion1.jpg' %}" alt="Foto de {{ habitacion.tipo }}">
                         {% endif %}
-                        <!-- Colocar el cuadro de información debajo de la imagen -->
                         <div class="carousel-caption-static">
                             <h5>{{ habitacion.tipo }}</h5>
                             <ul>
@@ -49,10 +45,12 @@
                                 <li>Baño privado: {{ habitacion.bano_privado|yesno:"Sí,No" }}</li>
                                 <li>Admite mascotas: {{ habitacion.admite_mascotas|yesno:"Sí,No" }}</li>
                                 <li>Vistas: {{ habitacion.vista }}</li>
+                                <li>Id: {{ habitacion.id }}</li>
                             </ul>
                         </div>
                     </div>
                     {% endfor %}
+                    
                 </div>
                 <!-- Controles de navegación -->
                 <a class="carousel-control-prev" href="#habitacionesCarousel" role="button" data-slide="prev">
@@ -65,30 +63,75 @@
                 </a>
             </div>
         </div>
-   
 
         <div>
         <div id="calendar-container"></div>
 
-        <!-- Botón de Reservar debajo del calendario -->
-<div class="text-center mt-3">
-    <form action="{% url 'reservas' %}" method="POST">
-        {% csrf_token %}
-        <!-- Campo oculto para las fechas seleccionadas -->
-        <input type="hidden" id="start-date" name="start_date" value="{{ fecha_inicio }}">
-        <input type="hidden" id="end-date" name="end_date" value="{{ fecha_fin }}">
-        
-        <!-- Campo oculto para el ID de la habitación -->
-        <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
-        
-        <button type="submit" class="btn btn-secundary btn-lg">Reservar</button>
-    </form>
-</div>
-    </div>
-    </div>
-</div>
+        <div class="mt-4">
+            <!-- Formulario de filtros -->
+            <form method="GET" action="">
+                <div class="form-group">
+                    <label for="tipo">Tipo de habitación</label>
+                    <select id="tipo" name="tipo" class="form-control">
+                        <option value="">Todos los tipos</option>
+                        {% for tipo_disponible in tipos_disponibles %}
+                            <option value="{{ tipo_disponible }}" {% if tipo_disponible == tipo %}selected{% endif %}>{{ tipo_disponible }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="capacidad">Capacidad mínima</label>
+                    <select id="capacidad" name="capacidad" class="form-control">
+                        <option value="">Cualquier capacidad</option>
+                        {% for capacidad_disponible in capacidades_disponibles %}
+                            <option value="{{ capacidad_disponible }}" {% if capacidad_disponible|stringformat:"d" == capacidad|stringformat:"d" %}selected{% endif %}>{{ capacidad_disponible }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+        </div>
+        {% if habitacion %}
+            <form action="{% url 'consultar_reserva' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" id="start-date" name="start_date" value="{{ fecha_inicio }}">
+                <input type="hidden" id="end-date" name="end_date" value="{{ fecha_fin }}">
+                <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
+                <button type="submit" class="btn btn-secondary btn-lg" onclick="console.log('Start date:', document.getElementById('start-date').value); console.log('End date:', document.getElementById('end-date').value); console.log('Habitacion ID:', document.getElementsByName('habitacion_id')[0].value);">Consultar</button>
+            </form>
+        {% else %}
+            <p>No hay habitación seleccionada para la reserva.</p>
+        {% endif %}
 
-<!-- Sección de reseñas y mapa -->
+        <!-- Formulario de Reserva separado -->
+        <div class="text-center mt-3">
+            <form action="{% url 'consultar_reserva' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" id="start-date" name="start_date" value="{{ fecha_inicio }}">
+                <input type="hidden" id="end-date" name="end_date" value="{{ fecha_fin }}">
+                <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
+                <button type="submit" class="btn btn-secondary btn-lg">Consular</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    // Función para cambiar el ID de la habitación cuando se navega en el carrusel
+    $('#habitacionesCarousel').on('slid.bs.carousel', function (e) {
+        // Obtener la habitación activa
+        var activeItem = $(e.relatedTarget);
+        var habitacionId = activeItem.data('habitacion-id');
+
+        // Actualizar el campo oculto del formulario
+        document.getElementsByName('habitacion_id')[0].value = habitacionId;
+        console.log("Habitación seleccionada ID:", habitacionId);  // Para depuración
+    });
+</script>
+
+{% comment %} <!-- Sección de reseñas y mapa -->
 <div class="row mt-5">
     <!-- Reseñas -->
     <div class="col-md-6">
@@ -116,7 +159,6 @@
                 width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
-</div>
-</div>
+</div> {% endcomment %}
 
 {% endblock %}

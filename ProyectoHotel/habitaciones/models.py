@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class Habitacion(models.Model):
     tipo = models.CharField(max_length=100)
+    capacidad = models.IntegerField(default=1)
     precio = models.DecimalField(max_digits=8, decimal_places=2)
     desayuno_incluido = models.BooleanField(default=False)
     bano_privado = models.BooleanField(default=True)

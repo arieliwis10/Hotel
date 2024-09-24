@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import habitaciones, reservas
+from .views import habitaciones, consultar_reserva
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -10,7 +10,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
     path("habitaciones/", habitaciones, name="habitaciones"),
-    path("reservas/", reservas, name="reservas"),
+    path('consulta/', consultar_reserva, name='consultar_reserva'),
 ]
 
 if settings.DEBUG:
