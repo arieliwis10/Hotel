@@ -4,12 +4,11 @@
 {% block content %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<section id="reservation-banner">   
-    <h1>Detalles de la Reserva</h1>
+<section id="welcome-banner">   
+    <h1>Detalles de la reserva</h1>
 </section>
 
 <div class="container mt-4">
-    <h2>Reserva para la Habitación: {{ habitacion.tipo }}</h2>
     <div class="row">
         <div class="col-md-6">
             {% if habitacion.imagen %}
@@ -19,36 +18,47 @@
             {% endif %}
         </div>
         <div class="col-md-6">
-            <h5>Detalles de la Habitación</h5>
+            <h5>Detalles de la reserva</h5>
+            <p>Fecha reserva: {{ start_date_formateada }} - Fecha de fin: {{ end_date_formateada }}</p>
+            <p>${{ habitacion.precio }} x {{ dias_diferencia }} noches</p>
+            <p>${{ precio_total_formateado }}</p>
+            <p>Tarifa limpieza: ${{ limpieza_formateado }}</p>
+            <p>Impuestos: ${{ impuesto_formateado }}</p>
+            <p>Total reserva: ${{ total_reserva_formateado }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h2>{{ habitacion.tipo }}</h2>
+            <h3><span style="color:#FFD700;">★</span> {{ habitacion.calificacion|floatformat:2 }} Calificación</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
             <ul>
-                <li>Precio: ${{ habitacion.precio }}</li>
+                <li>Precio: ${{ precio_formateado }}</li>
                 <li>Desayuno: {{ habitacion.desayuno_incluido|yesno:"Incluido,No incluido" }}</li>
                 <li>Baño privado: {{ habitacion.bano_privado|yesno:"Sí,No" }}</li>
                 <li>Admite mascotas: {{ habitacion.admite_mascotas|yesno:"Sí,No" }}</li>
                 <li>Vistas: {{ habitacion.vista }}</li>
             </ul>
         </div>
-    </div>
-
-    <h4>Fechas de la Reserva</h4>
-    <p>Fecha de inicio: {{ start_date }}</p>
-    <p>Fecha de fin: {{ end_date }}</p>
-
-    <div class="text-center mt-4">
-        <h3>Confirmar Reserva</h3>
-        <form action="{% url 'consultar_reserva' %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
-            <input type="hidden" name="start_date" value="{{ start_date }}">
-            <input type="hidden" name="end_date" value="{{ end_date }}">
-            <button type="submit" class="btn btn-success btn-lg">Confirmar Reserva</button>
-        </form>
+        <div class="col-md-6 text-center">
+            <form action="{% url 'consultar_reserva' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
+                <input type="hidden" name="start_date" value="{{ start_date }}">
+                <input type="hidden" name="end_date" value="{{ end_date }}">
+                <button type="submit" class="btn btn-success btn-lg">Confirmar Reserva</button>
+            </form>
+        </div>
     </div>
 </div>
 
 <!-- Sección de reseñas y mapa -->
 <div class="row mt-5">
     <!-- Reseñas -->
+     
     <div class="col-md-6">
         <h4>02 Reseñas</h4>
         <div class="review">
@@ -62,6 +72,7 @@
             <p>★★★★☆</p>
             <p>Excelente ubicación, muy cerca a distintas opciones donde ir a comer. Lo malo, al momento de llegar estaba un poco sucio, pero el resto ok!</p>
         </div>
+        
     </div>
 
     <!-- Mapa -->

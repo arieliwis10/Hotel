@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    let currentSlideIndex = 0;
     const slidesContainer = document.querySelector('.slides');
+    let currentSlideIndex = 0;
+    
+    // Obtener el campo oculto del formulario para actualizar el habitacion_id
+    const habitacionIdInput = document.querySelector('input[name="habitacion_id"]');
     
     // Función para mostrar una diapositiva específica
     function showSlide(index) {
@@ -25,7 +28,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 dot.classList.remove('active');
             }
         });
+
+        // Obtener el ID de la habitación de la diapositiva activa
+        const habitacionId = slides[currentSlideIndex].dataset.habitacionId;
+        
+        // Actualizar el campo oculto si habitacionId está disponible
+        if (habitacionId) {
+            habitacionIdInput.value = habitacionId;
+            console.log("Habitación seleccionada ID:", habitacionId);  // Para depuración
+        }
     }
+
+    // Mostrar la primera diapositiva al cargar la página
+    showSlide(currentSlideIndex);
 
     // Función para mover a la diapositiva actual al hacer clic en los puntos
     window.currentSlide = function(index) {
@@ -38,5 +53,5 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Cambio automático de diapositivas cada 3 segundos
-    setInterval(autoChangeSlide, 3000);  // Cambia cada 3 segundos
+    setInterval(autoChangeSlide, 2000);  // Cambia cada 3 segundos
 });

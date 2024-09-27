@@ -38,6 +38,12 @@ header ul li a {
     color: white;
     
 }
+ul {
+    list-style-type: none; /* Elimina las viñetas */
+    padding: 0; /* Elimina el relleno */
+    margin: 0; /* Elimina el margen */
+}
+
 
 h1 {
     font-size: 100px;
@@ -340,3 +346,4 @@ button.btn-secundary:hover {
 .mt-5 {
     margin-top: 50px;
 }
+
