@@ -94,6 +94,12 @@ def mostrar_calendario(request):
 def consultar_reserva(request):
     resenas = Resena.objects.all()
     habitacion_id = request.POST.get('habitacion_id')
+    if not habitacion_id:
+        # Manejar el caso donde no se envía el habitacion_id
+        return HttpResponse("No se ha seleccionado ninguna habitación.")
+
+    # Si el habitacion_id es válido, continuar con la consulta
+    habitacion = get_object_or_404(Habitacion, id=habitacion_id)
     start_date = request.POST.get('start_date')
     end_date = request.POST.get('end_date')
     habitacion = get_object_or_404(Habitacion, id=habitacion_id)
