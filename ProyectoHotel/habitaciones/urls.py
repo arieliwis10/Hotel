@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import habitaciones, consultar_reserva, guardar_reserva, guardar_pago
+from .views import habitaciones, consultar_reserva, guardar_reserva, guardar_pago, confirmacion_reserva
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -13,6 +13,7 @@ urlpatterns = [
     path('consulta/', consultar_reserva, name='consultar_reserva'),
     path('pagar/', guardar_reserva, name='guardar_reserva'),
     path('guardar_pago/', guardar_pago, name='guardar_pago'),
+    path('confirmacion/<int:reserva_id>/', confirmacion_reserva, name='confirmacion_reserva'),
 ]
 
 if settings.DEBUG:

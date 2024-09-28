@@ -1,9 +1,13 @@
+from django.contrib.auth.models import User
+import qrcode
+from io import BytesIO
+from django.core.files import File
 from datetime import datetime
 from django.shortcuts import get_object_or_404, render
 from .models import Habitacion, Resena
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Reserva, Pago
+from .models import Reserva, Pago, Profile
 
 
 def home(request):
@@ -113,8 +117,6 @@ def guardar_reserva(request):
         fecha_fin = request.POST.get('end_date')
         valor_reserva = request.POST.get('valor_reserva')
 
-        print(f"ID de habitación: {habitacion_id}")  # Agregar para debug
-
         try:
             habitacion = Habitacion.objects.get(id=habitacion_id)
             
@@ -134,10 +136,45 @@ def guardar_pago(request):
         reserva_id = request.POST.get('reserva_id')
         tipo_pago = request.POST.get('tipo_tarjeta')
         reserva = get_object_or_404(Reserva, id=reserva_id)
-        monto = reserva.valor_reserva 
+        monto = reserva.valor_reserva
+        
+        nombre_completo = request.POST.get('nombre_completo')
+        correo = request.POST.get('correo')
+        direccion = request.POST.get('direccion')
+        telefono = request.POST.get('telefono')
+        
+        cliente_id.email = correo 
+        cliente_id.save()
+
+        profile, created = Profile.objects.get_or_create(user=cliente_id)
+        profile.nombre_completo = nombre_completo
+        profile.direccion = direccion
+        profile.telefono = telefono
+        profile.save()
 
         nuevo_pago = Pago(cliente_id=cliente_id, id_reserva=reserva, tipo_pago=tipo_pago, monto=monto, estado_pago=True)
         nuevo_pago.save()
         
-        return HttpResponse("Pago realizado con éxito.")
-    return HttpResponse("Método no permitido.", status=405)
+        reserva.estado_reserva = 'pagado'
+        reserva.save()
+        
+        perfil = get_object_or_404(Profile, user=cliente_id)
+        
+        qr_data = f"Reserva ID: {reserva.cliente_id}\nCliente: {reserva.cliente_id.username}\nHabitación: {reserva.habitacion.tipo}\nValor: {reserva.valor_reserva}"
+        qr = qrcode.make(qr_data)
+        
+        buffer = BytesIO()
+        qr.save(buffer)
+        buffer.seek(0)
+        
+        qr_file = File(buffer, name=f"reserva_{reserva.id}.png")
+        
+        reserva.qr_code.save(qr_file.name, qr_file, save=True)
+        
+        return render(request, 'confirmacion.html', {'reserva': reserva, 'perfil': perfil})
+    return render(request, 'pagar.html', {'reserva': reserva})
+
+def confirmacion_reserva(request, reserva_id):
+    reserva = Reserva.objects.get(id=reserva_id)
+    return render(request, 'confirmacion.html', {'reserva': reserva})
+    

@@ -2,7 +2,7 @@
 # Register your models here.
 
 from django.contrib import admin
-from .models import Habitacion, Reserva, Resena, Pago
+from .models import Habitacion, Reserva, Resena, Pago, Profile
 
 @admin.register(Habitacion)
 class HabitacionAdmin(admin.ModelAdmin):
@@ -19,3 +19,8 @@ class ResenaAdmin(admin.ModelAdmin):
 @admin.register(Pago)   
 class PagoAdmin(admin.ModelAdmin):
     list_display = ['id_reserva', 'tipo_pago', 'fecha_pago', 'monto','estado_pago']
+    
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'nombre_completo', 'direccion', 'telefono')
+    search_fields = ('user__username', 'nombre_completo')
