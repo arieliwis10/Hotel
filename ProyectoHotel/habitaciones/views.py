@@ -3,40 +3,11 @@ from django.shortcuts import get_object_or_404, render
 from .models import Habitacion, Resena
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Reserva
+from .models import Reserva, Pago
 
 
 def home(request):
     return render(request, 'home.html')
-
-""" def habitaciones(request):
-    tipo = request.GET.get('tipo', '')
-    capacidad = request.GET.get('capacidad', '')  
-    fecha_inicio = request.GET.get('start_date', None)
-    fecha_fin = request.GET.get('end_date', None)
-
-    habitaciones = Habitacion.objects.all()
-
-    if tipo:
-        habitaciones = habitaciones.filter(tipo=tipo)
-    if capacidad:
-        habitaciones = habitaciones.filter(capacidad__gte=capacidad)
-    #Falta crear validacion por fecha(disponibilidad)
-    if fecha_inicio and fecha_fin:
-        pass  
-
-    tipos_disponibles = Habitacion.objects.values_list('tipo', flat=True).distinct()
-    capacidades_disponibles = Habitacion.objects.values_list('capacidad', flat=True).distinct().order_by('capacidad')
-
-    return render(request, 'habitaciones.html', {
-        'habitaciones': habitaciones,
-        'tipo': tipo,
-        'capacidad': capacidad,
-        'tipos_disponibles': tipos_disponibles,
-        'capacidades_disponibles': capacidades_disponibles,
-        'fecha_inicio': fecha_inicio,
-        'fecha_fin': fecha_fin,
-    }) """
 
 def habitaciones(request):
     tipo = request.GET.get('tipo', '')
@@ -105,13 +76,12 @@ def consultar_reserva(request):
     valor_total= (dias_diferencia*habitacion.precio)
     precio_total_formateado = f"{valor_total:,.0f}".replace(",", ".")
     precio_formateado = f"{habitacion.precio:,.0f}".replace(",", ".")
-    limpieza = 12000
-    impuesto = 5990
+    limpieza = habitacion.valor_limpieza
+    impuesto = int(valor_total)*habitacion.valor_impuesto
     total_reserva = (valor_total+limpieza+impuesto)
     limpieza_formateado = f"{limpieza:,.0f}".replace(",", ".")
     impuesto_formateado = f"{impuesto:,.0f}".replace(",", ".")
-    total_reserva_formateado = f"{total_reserva:,.0f}".replace(",", ".")
-    
+    valor_reserva = int(total_reserva)
     start_date_formateada = datetime.strptime(start_date, "%Y-%m-%d").strftime("%d-%m-%Y")
     end_date_formateada = datetime.strptime(end_date, "%Y-%m-%d").strftime("%d-%m-%Y")
     
@@ -131,6 +101,43 @@ def consultar_reserva(request):
         'precio_total_formateado': precio_total_formateado,
         'limpieza_formateado': limpieza_formateado,
         'impuesto_formateado': impuesto_formateado,
-        'total_reserva_formateado': total_reserva_formateado
+        'total_reserva': total_reserva,
+        'valor_reserva': valor_reserva
     })
     
+def guardar_reserva(request):
+    if request.method == 'POST':
+        cliente_id = request.user
+        habitacion_id = request.POST.get('habitacion_id')
+        fecha_inicio = request.POST.get('start_date')
+        fecha_fin = request.POST.get('end_date')
+        valor_reserva = request.POST.get('valor_reserva')
+
+        print(f"ID de habitación: {habitacion_id}")  # Agregar para debug
+
+        try:
+            habitacion = Habitacion.objects.get(id=habitacion_id)
+            
+            nueva_reserva = Reserva(cliente_id=cliente_id, fecha_inicio=fecha_inicio, fecha_fin=fecha_fin, habitacion=habitacion, valor_reserva=valor_reserva)
+            nueva_reserva.save()
+            
+            return render(request, 'pagar.html', {'reserva': nueva_reserva})
+        except Habitacion.DoesNotExist:
+            return HttpResponse("La habitación seleccionada no existe", status=400)
+    else:
+        return HttpResponse("Método no permitido.", status=405)
+
+    
+def guardar_pago(request):
+    if request.method == 'POST':
+        cliente_id = request.user
+        reserva_id = request.POST.get('reserva_id')
+        tipo_pago = request.POST.get('tipo_tarjeta')
+        reserva = get_object_or_404(Reserva, id=reserva_id)
+        monto = reserva.valor_reserva 
+
+        nuevo_pago = Pago(cliente_id=cliente_id, id_reserva=reserva, tipo_pago=tipo_pago, monto=monto, estado_pago=True)
+        nuevo_pago.save()
+        
+        return HttpResponse("Pago realizado con éxito.")
+    return HttpResponse("Método no permitido.", status=405)

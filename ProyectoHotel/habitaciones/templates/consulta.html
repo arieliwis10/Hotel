@@ -17,14 +17,19 @@
                 <img class="img-fluid" src="{% static 'habitaciones/images/habitacion1.jpg' %}" alt="Foto de {{ habitacion.tipo }}">
             {% endif %}
         </div>
-        <div class="col-md-6">
-            <h5>Detalles de la reserva</h5>
-            <p>Fecha reserva: {{ start_date_formateada }} - Fecha de fin: {{ end_date_formateada }}</p>
+        <div class="col-md-3">
+            <h5 class="text-center pl-5">Detalles de la reserva</h5>
+            <p>Fecha reserva: {{ start_date_formateada }}</p>
             <p>${{ habitacion.precio }} x {{ dias_diferencia }} noches</p>
+            <p>Tarifa limpieza:</p>
+            <p>Impuestos:</p>
+        </div>
+        <div class="col-md-3 pt-3">
+            <p></p>
+            <p>Fecha de fin: {{ end_date_formateada }}</p>
             <p>${{ precio_total_formateado }}</p>
-            <p>Tarifa limpieza: ${{ limpieza_formateado }}</p>
-            <p>Impuestos: ${{ impuesto_formateado }}</p>
-            <p>Total reserva: ${{ total_reserva_formateado }}</p>
+            <p>${{ limpieza_formateado }}</p>
+            <p>${{ impuesto_formateado }}</p>
         </div>
     </div>
     <div class="row">
@@ -35,7 +40,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 text-center">
-            <ul>
+            <ul class="list-unstyled">
                 <li>Precio: ${{ precio_formateado }}</li>
                 <li>Desayuno: {{ habitacion.desayuno_incluido|yesno:"Incluido,No incluido" }}</li>
                 <li>Baño privado: {{ habitacion.bano_privado|yesno:"Sí,No" }}</li>
@@ -43,13 +48,14 @@
                 <li>Vistas: {{ habitacion.vista }}</li>
             </ul>
         </div>
-        <div class="col-md-6 text-center">
-            <form action="{% url 'consultar_reserva' %}" method="POST">
+        <div class="col-md-6 pl-5">
+            <form action="{% url 'guardar_reserva' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
                 <input type="hidden" name="start_date" value="{{ start_date }}">
                 <input type="hidden" name="end_date" value="{{ end_date }}">
-                <button type="submit" class="btn btn-success btn-lg">Confirmar Reserva</button>
+                <input type="hidden" name="valor_reserva" value="{{ valor_reserva }}">
+                <button type="submit" class="btn btn-success btn-lg">Reserva</button>
             </form>
         </div>
     </div>
