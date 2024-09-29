@@ -9,6 +9,7 @@ class Profile(models.Model):
     direccion = models.CharField(max_length=255, blank=True)
     telefono = models.CharField(max_length=20, blank=True)
     nombre_completo = models.CharField(max_length=255, blank=True)
+    correo = models.CharField(max_length=255, blank=True)
     
     def __str__(self):
         return self.user.username
@@ -41,7 +42,7 @@ class Reserva(models.Model):
     valor_reserva = models.IntegerField(default=0)
     qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
     def __str__(self):
-        return f"Reserva del {self.fecha_inicio} al {self.fecha_fin} para la habitación {self.habitacion}"
+        return str(self.cliente_id.username)
 
 class Pago(models.Model):
     cliente_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -65,4 +66,4 @@ class Resena(models.Model):
     def __str__(self):
         return str (self.calificacion)
     
-#usuarios: juan , pass:Juan1234
+#usuarios: juan , pass:Juan1234 , naty, pass:Nataly1234

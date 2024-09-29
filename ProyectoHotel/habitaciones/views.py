@@ -1,14 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 import qrcode
 from io import BytesIO
 from django.core.files import File
 from datetime import datetime
 from django.shortcuts import get_object_or_404, render
-from .models import Habitacion, Resena
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Reserva, Pago, Profile
-
+from .models import Pago, Profile, Habitacion, Resena, Reserva
 
 def home(request):
     return render(request, 'home.html')
@@ -108,7 +107,7 @@ def consultar_reserva(request):
         'total_reserva': total_reserva,
         'valor_reserva': valor_reserva
     })
-    
+@login_required
 def guardar_reserva(request):
     if request.method == 'POST':
         cliente_id = request.user
@@ -150,12 +149,13 @@ def guardar_pago(request):
         profile.nombre_completo = nombre_completo
         profile.direccion = direccion
         profile.telefono = telefono
+        profile.correo = correo
         profile.save()
 
         nuevo_pago = Pago(cliente_id=cliente_id, id_reserva=reserva, tipo_pago=tipo_pago, monto=monto, estado_pago=True)
         nuevo_pago.save()
         
-        reserva.estado_reserva = 'pagado'
+        reserva.estado_reserva = 'Pagado'
         reserva.save()
         
         perfil = get_object_or_404(Profile, user=cliente_id)

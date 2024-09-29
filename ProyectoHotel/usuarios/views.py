@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User, Group
+from habitaciones.models import Reserva
 from django.contrib import messages
 from .forms import RegistroUsuarioForm
 from django.contrib.auth.decorators import login_required
@@ -9,13 +11,23 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def perfil_usuario(request):
-    return render(request, 'perfiles.html')
+    if request.user.is_authenticated:
+        reservas = Reserva.objects.filter(cliente_id=request.user)
+
+        context = {
+            'reservas': reservas
+        }
+        return render(request, 'perfiles.html', context)
+    else:
+        return redirect('home')
 
 def registro(request):
     if request.method == "POST":
         form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
             user = form.save()
+            grupo_clientes = Group.objects.get(name='Clientes')
+            user.groups.add(grupo_clientes)
             login(request, user)
             messages.success(request, "Registro exitoso.")
             return redirect("home")  # Redirige al usuario después del registro

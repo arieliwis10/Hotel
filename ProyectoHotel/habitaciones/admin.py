@@ -10,7 +10,7 @@ class HabitacionAdmin(admin.ModelAdmin):
     
 @admin.register(Reserva)   
 class ReservaAdmin(admin.ModelAdmin):
-    list_display = ['fecha_inicio', 'fecha_fin', 'habitacion', 'estado_reserva', 'valor_reserva']
+    list_display = ['cliente_id','fecha_inicio', 'fecha_fin', 'habitacion', 'estado_reserva', 'valor_reserva']
 
 @admin.register(Resena)   
 class ResenaAdmin(admin.ModelAdmin):
@@ -22,5 +22,5 @@ class PagoAdmin(admin.ModelAdmin):
     
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'nombre_completo', 'direccion', 'telefono')
+    list_display = ('user', 'nombre_completo', 'direccion', 'correo', 'telefono')
     search_fields = ('user__username', 'nombre_completo')

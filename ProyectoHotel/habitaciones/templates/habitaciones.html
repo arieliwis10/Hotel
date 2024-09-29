@@ -25,9 +25,8 @@
     <h1>Habitaciones</h1>
 </section>
     <div class="row">
-        <!-- Carrusel de Habitaciones -->
-        <div class="col-md-6">
-            <h2>Habitaciones Disponibles</h2>
+        <div class="col-md-4 offset ml-5">
+            <h2 class="text-center mt-4">Habitaciones Disponibles</h2>
             <div id="habitacionesCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     {% for habitacion in habitaciones %}
@@ -39,7 +38,7 @@
                         {% endif %}
                         <div class="carousel-caption-static">
                             <h5>{{ habitacion.tipo }}</h5>
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li>Precio: ${{ habitacion.precio }}</li>
                                 <li>Desayuno: {{ habitacion.desayuno_incluido|yesno:"Incluido,No incluido" }}</li>
                                 <li>Baño privado: {{ habitacion.bano_privado|yesno:"Sí,No" }}</li>
@@ -49,9 +48,7 @@
                         </div>
                     </div>
                     {% endfor %}
-                    
                 </div>
-                <!-- Controles de navegación -->
                 <a class="carousel-control-prev" href="#habitacionesCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Anterior</span>
@@ -66,7 +63,7 @@
         <div>
         <div id="calendar-container"></div>
 
-        <div class="mt-4">
+        <div class="col-mt-4 ml-5 mt-3">
             <!-- Formulario de filtros -->
             <form method="GET" action="">
                 <div class="form-group">
@@ -87,23 +84,27 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-secondary">Filtrar</button>
                 </div>
             </form>
         </div>
         <!-- Formulario de Reserva separado -->
-        <div class="text-center mt-3">
+        <div class="text-center ml-5 my-3">
             <form action="{% url 'consultar_reserva' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" id="start-date" name="start_date" value="{{ fecha_inicio }}">
                 <input type="hidden" id="end-date" name="end_date" value="{{ fecha_fin }}">
                 <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
-                <button type="submit" class="btn btn-secondary btn-lg">Consultar</button>
+                <button type="submit" class="btn btn-primary">Consultar</button>
             </form>
         </div>
     </div>
 </div>
+<div class="row my-5">
+    <div class="col-12 my-3">
+        <p></p>
+    </div>
 </div>
 <script>
     // Función para cambiar el ID de la habitación cuando se navega en el carrusel

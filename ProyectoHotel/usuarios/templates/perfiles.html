@@ -1,13 +1,51 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil del Usuario</title>
-</head>
-<body>
-    <h2>Bienvenido, {{ user.username }}</h2>
-    <p>Este es tu perfil de usuario.</p>
-    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<section id="welcome-banner">   
+    <h1>Mi cuenta</h1>
+</section>
+    
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center mt-5">
+            <h2>Bienvenido, {{ user.username }}</h2>
+            <img src="{% static 'usuarios/images/6522581.png' %}" alt="Usuario" style="width: 20%;" />
+        </div>
+        <div class="col-md-6 offset-md-3 text-center">
+            <h3>Mis Reservas</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID Reserva</th>
+                        <th>Tipo de Habitación</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Fin</th>
+                        <th>Estado de Reserva</th>
+                        <th>Valor de Reserva</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ reserva.id }}</td>
+                        <td>{{ reserva.habitacion.tipo }}</td>
+                        <td>{{ reserva.fecha_inicio }}</td>
+                        <td>{{ reserva.fecha_fin }}</td>
+                        <td>{{ reserva.estado_reserva }}</td>
+                        <td>${{ reserva.valor_reserva }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">No tienes reservas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
