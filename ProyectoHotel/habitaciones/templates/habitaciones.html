@@ -4,6 +4,7 @@
 {% block content %}
  <!-- Incluir Bootstrap CSS -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="{% static 'habitaciones/css/styles.css' %}">
     
  <!-- Flatpickr CSS para el calendario -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -18,15 +19,21 @@
 <!-- Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
- <script src="{% static 'habitaciones/js/calendario.js' %}"></script>
+<script src="{% static 'habitaciones/js/calendario.js' %}"></script>
 
 <!-- Banner de Bienvenida -->
 <section id="welcome-banner">   
     <h1>Habitaciones</h1>
 </section>
+    <div class="row mt-4 mb-2">
+        <div class="col-md-12 text-center">
+            <h2>Habitaciones Disponibles</h2>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-4 offset ml-5">
-            <h2 class="text-center mt-4">Habitaciones Disponibles</h2>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-5 offset ml-5">
             <div id="habitacionesCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     {% for habitacion in habitaciones %}
@@ -61,46 +68,46 @@
         </div>
 
         <div>
-        <div id="calendar-container"></div>
-
-        <div class="col-mt-4 ml-5 mt-3">
-            <!-- Formulario de filtros -->
-            <form method="GET" action="">
-                <div class="form-group">
-                    <label for="tipo">Tipo de habitación</label>
-                    <select id="tipo" name="tipo" class="form-control">
-                        <option value="">Todos los tipos</option>
-                        {% for tipo_disponible in tipos_disponibles %}
-                            <option value="{{ tipo_disponible }}" {% if tipo_disponible == tipo %}selected{% endif %}>{{ tipo_disponible }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="capacidad">Capacidad mínima</label>
-                    <select id="capacidad" name="capacidad" class="form-control">
-                        <option value="">Cualquier capacidad</option>
-                        {% for capacidad_disponible in capacidades_disponibles %}
-                            <option value="{{ capacidad_disponible }}" {% if capacidad_disponible|stringformat:"d" == capacidad|stringformat:"d" %}selected{% endif %}>{{ capacidad_disponible }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-secondary">Filtrar</button>
-                </div>
-            </form>
-        </div>
-        <!-- Formulario de Reserva separado -->
-        <div class="text-center ml-5 my-3">
-            <form action="{% url 'consultar_reserva' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" id="start-date" name="start_date" value="{{ fecha_inicio }}">
-                <input type="hidden" id="end-date" name="end_date" value="{{ fecha_fin }}">
-                <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
-                <button type="submit" class="btn btn-primary">Consultar</button>
-            </form>
+            <div id="calendar-container"></div>
+            
+            <div class="col-mt-4 ml-5 mt-3">
+                <!-- Formulario de filtros -->
+                <form method="GET" action="">
+                    <div class="form-group">
+                        <label for="tipo">Tipo de habitación</label>
+                        <select id="tipo" name="tipo" class="form-control">
+                            <option value="">Todos los tipos</option>
+                            {% for tipo_disponible in tipos_disponibles %}
+                                <option value="{{ tipo_disponible }}" {% if tipo_disponible == tipo %}selected{% endif %}>{{ tipo_disponible }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacidad">Capacidad mínima</label>
+                        <select id="capacidad" name="capacidad" class="form-control">
+                            <option value="">Cualquier capacidad</option>
+                            {% for capacidad_disponible in capacidades_disponibles %}
+                                <option value="{{ capacidad_disponible }}" {% if capacidad_disponible|stringformat:"d" == capacidad|stringformat:"d" %}selected{% endif %}>{{ capacidad_disponible }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-secondary">Filtrar</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Formulario de Reserva separado -->
+            <div class="text-center ml-5 my-3">
+                <form action="{% url 'consultar_reserva' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="start-date" name="start_date" value="{{ fecha_inicio }}">
+                    <input type="hidden" id="end-date" name="end_date" value="{{ fecha_fin }}">
+                    <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
+                    <button type="submit" class="btn btn-primary">Consultar</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 <div class="row my-5">
     <div class="col-12 my-3">
         <p></p>

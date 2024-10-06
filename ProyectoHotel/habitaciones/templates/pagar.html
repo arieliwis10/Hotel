@@ -3,51 +3,47 @@
 
 {% block content %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'habitaciones/css/styles.css' %}">
 
 <section id="welcome-banner">   
     <h1>Pago</h1>
 </section>
 
-<div class="container mt-4">
+<div class="container">
     <form action="{% url 'guardar_pago' %}" method="POST">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="">Resumen de tu reserva</h5>
-                        <p>Fecha reserva: {{ reserva.fecha_inicio }}</p>
-                        <p>Horario Check-In:</p>
-                        <p>Total a pagar:</p>
-                    </div>
-                    <div class="col-md-6 pt-3">
-                        <p> </p>
-                        <p> </p>
-                        <p>Fecha de fin: {{ reserva.fecha_fin }}</p>
-                        <p>12:00 pm</p>
-                        <p>${{ reserva.valor_reserva }}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h5>Datos de Reserva</h5>
-                        <label for="nombre_completo">Nombre Completo:</label>
-                        <input type="text" id="nombre_completo" name="nombre_completo" >
-                        <br>
-                        <label for="correo">Correo:</label>
-                        <input type="email" id="correo" name="correo" >
-                        <br>
-                        <label for="direccion">Dirección:</label>
-                        <input type="text" id="direccion" name="direccion">
-                        <br>
-                        <label for="telefono">Telefono:</label>
-                        <input type="text" id="telefono" name="telefono">
-                    </div>
-                </div>
+        <div class="row mt-4 mb-4 card">
+            <div class="col-md-12 text-center">
+                <h5>Resumen de tu reserva</h5><br>
+                <p>Fecha reserva: {{ reserva.fecha_inicio }}&nbsp;&nbsp;&nbsp;Fecha de fin: {{ reserva.fecha_fin }}</p>
+                <p>Horario Check-In: 12:00 pm</p>
+                <p>Total a pagar: ${{ reserva.valor_reserva }}</p>
             </div>
-            <div class="col-md-6">
-                <h5>Metodo de pago</h5>
-                <input type="hidden" name="reserva_id" value="{{ reserva.id }}">
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-1"></div>
+            
+            <div class="col-md-5">
+                <h5 class="text-left">Datos de Reserva</h5>
+                <div class="mt-4">
+                    <label for="nombre_completo">Nombre Completo:</label>
+                    <input type="text" id="nombre_completo" name="nombre_completo" >
+                    <br>
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" name="correo" >
+                    <br>
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion">
+                    <br>
+                    <label for="telefono">Telefono:</label>
+                    <input type="text" id="telefono" name="telefono">
+                </div>
+                
+            </div>
+            <div class="col-md-5 ml-5">
+                <h5 class="text-left">Metodo de pago</h5>
+                <div class="mt-4">
+                    <input type="hidden" name="reserva_id" value="{{ reserva.id }}">
                 <div class="form-group">
                     <label for="tipo_tarjeta">Tarjeta de crédito o débito</label>
                     <select id="tipo_tarjeta" name="tipo_tarjeta" required>
@@ -81,11 +77,14 @@
                         <option>México</option>
                     </select>
                 </div>
+                </div>
             </div>
+            <div class="col-md-1"></div>
         </div>
+            
         <div class="row my-5 text-center">
             <div class="col-md-12 mb-5 pb-5">
-                <button type="submit" class="btn btn-success">Proceder al Pago</button>
+                <button type="submit" class="btn btn-success">Confirmar y Pagar</button>
             </div>
         </div>
     </form> 

@@ -1,8 +1,19 @@
 body {
     font-family: Arial, sans-serif;
+    font-size: 18px;
     margin: 0;
     padding: 0;
 }
+
+.container, .form-control, .btn {
+    font-size: 1.2rem; /* Incrementa el tamaño de las letras en los contenedores y formularios */
+    padding: 10px; /* Ajusta el espacio interior de los elementos */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5em; /* Incrementa el tamaño de los encabezados */
+}
+
 
 header {
     background-color: #000000;
@@ -55,10 +66,7 @@ h1 {
 }
 
 .btn {
-    color: #ff4500; /* Cambia el color para el enlace activo */
-    background-color: #0c0c0c; /* Cambia el fondo para el enlace activo */
     zoom: 2;
-    
 }
 
 #search {
@@ -110,17 +118,7 @@ img {
 
 /* Estilos del botón */
 .btn-primary {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    padding: 10px 20px;
-    border: 2px solid black;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    background-color: white;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    zoom: 2;
 }
 
 .btn-primary:hover {
@@ -221,7 +219,7 @@ img {
 
 /* Ajustar las imágenes en el carrusel */
 .carousel-item img {
-    max-height: 400px;
+    max-height: 600px;
     object-fit: cover;
     width: 100%; /* Asegura que las imágenes ocupen todo el ancho */
 }
